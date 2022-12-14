@@ -1,14 +1,15 @@
 const mongoose = require("mongoose")
 const express = require('express');
 const app = express();
+const dotenv = require("dotenv");
 
+dotenv.config();
 
 //routes
-const authRoute = require("./Routes/auth");
+const todoRoute = require("./Routes/todoActions");
 
 //connect to database
-const url = process.env.DATABASE_URL.toString();
-mongoose.connect(url, () => console.log("Connected to TodoDatabase"));
+mongoose.connect(process.env.DATABASE_URL, () => console.log("Connected to TodoDatabase"));
 
 app.get("/", (req, res) => {
     res.send("Hello");
@@ -17,6 +18,6 @@ app.get("/", (req, res) => {
 //middleware
 app.use(express.json());
 //router middleware
-app.use("/todo", authRoute);
+app.use("/api/todo", todoRoute);
 
 app.listen(3000, () => console.log("live"));
