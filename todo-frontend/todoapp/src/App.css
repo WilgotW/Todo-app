@@ -1,6 +1,7 @@
 body{
   margin: 0;
   padding: 0;
+  background: rgb(48,48,48);
 }
 h1{
   margin: 0;
@@ -10,15 +11,18 @@ h1{
   text-align: center;
   margin: 0;
   padding: 0;
+  background: rgb(48,48,48);
 }
 
 .navbar{
   position: absolute;
 
   height: 100vh;
-  width: 100px;
+  width: 250px;
 
-  background: orange;
+  color: white;
+  border-right: solid 1px black;
+  background: #343a40;
 }
 
 .todo-section{
@@ -28,7 +32,7 @@ h1{
   height: 100vh;
   width: 100%;
 
-  background: white;
+  background: rgb(48,48,48);
 }
 
 .add-button{
@@ -56,15 +60,25 @@ h1{
 .todo-grid{
   display: grid;
   gap: 25px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .todo{
-  width: 300px;
-  height: 300px;
+  white-space: initial;
 
-  border: solid 5px black;
+  width: 300px;
+  min-height: 100px;
+
+  padding: 10px;
+
+  border: solid 3px #6c757d;
   border-radius: 15px;
   
-  background: green;
+}
+
+.todo-description{
+  font-weight: 600;
+  font-size: 20px;
+  word-wrap: break-word;
+  color: #6c757d;
 }
