@@ -52,3 +52,19 @@ h1{
   height: 50px;
   width: 50px;
 }
+
+.todo-grid{
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.todo{
+  width: 300px;
+  height: 300px;
+
+  border: solid 5px black;
+  border-radius: 15px;
+  
+  background: green;
+}

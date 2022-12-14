@@ -1,6 +1,5 @@
 import React from 'react'
-import { GrAdd } from 'react-icons/gr';
-import { IoIosAddCircleOutline } from 'react-icons/io';
+import TodoCollection from './TodoCollection'
 
 
 export default function TodoSection() {
@@ -8,10 +7,7 @@ export default function TodoSection() {
     <div className='todo-section'>
         <h1>Todos</h1>
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
-            <li className='add-button'>
-                {/* <IoIosAddCircleOutline className='add-icon' /> */}
-                <GrAdd className='add-icon' />
-            </li>
+            <TodoCollection />
         </div>
     </div>
   )
