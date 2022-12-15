@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddButton from './AddButton'
 import Todo from './Todo';
 
@@ -10,6 +10,15 @@ const testTodos = [
 
 export default function TodoCollection() {
   const [todos, setTodos] = useState(testTodos);
+
+  async function getTodos(){
+
+  }
+
+  useEffect(() => {
+    getTodos();
+  }, [])
+
   return (
     <div style={{width: "fit-content", height: "100%"}}>
       <div className='todo-grid'>

@@ -1,5 +1,14 @@
 const router = require("express").Router();
+const { db } = require("../model/Todo");
 const Todo = require("../model/Todo");
+
+router.get("/getAll", async (req, res) => {
+    
+    const allTodos = Todo.find();
+    if(!allTodos) return res.status(404).send("No todo found");
+    res.send(allTodos);
+});
+
 
 router.post("/add", async (req, res) => {
     const todo = new Todo({
