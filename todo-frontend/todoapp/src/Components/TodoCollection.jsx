@@ -14,7 +14,9 @@ export default function TodoCollection() {
     <div style={{width: "fit-content", height: "100%"}}>
       <div className='todo-grid'>
         {todos.map(todo => <Todo description={todo.description} />)}
-        <AddButton />
+        <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+          <AddButton />
+        </div>
       </div>
     </div>
   )
