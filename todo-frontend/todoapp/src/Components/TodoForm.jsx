@@ -6,6 +6,26 @@ import TextField from '@mui/material/TextField';
 
 export default function TodoForm() {
     const [loading, setLoading] = useState(false);
+    const [input, setInput] = useState("");
+
+    async function addTodo(ev) {
+        ev.preventDefault();
+        try{
+            const response = await fetch("http://localhost:4000/api/todo/add", {
+                method: 'POST',
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                },
+                body : JSON.stringify( {
+                    description: input
+                })
+            })
+            console.log(response);
+        }catch(err){
+            console.log(err);
+        }
+    }
   return (
     <div className='todo-form'>
         <div style={{height: "100px", width: "100%", display: "flex", justifyContent: "center", alignContent: "center", position: "absolute"}}>
@@ -22,12 +42,12 @@ export default function TodoForm() {
             <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
                 <TextField
                     id="outlined-multiline-static"
+                    onChange={ev => setInput(ev.target.value)}
                     label="Todo"
                     multiline
                     rows={4}
                 />
-                <Button variant="contained">Add Todo</Button>
-                
+                <Button variant="contained" onClick={addTodo}>Add Todo</Button>
                 
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <div className={loading ? "loader" : "invisible"} />
