@@ -31,7 +31,7 @@ export default function TodoCollection() {
       <div className='todo-grid'>
         {todos.length > 0 &&
           <>
-            {todos.map(todo => <Todo description={todo.description} id={todo._id} />)}
+            {todos.map(todo => <Todo description={todo.description} id={todo._id} getTodos={getTodos} />)}
           </>
         }
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>

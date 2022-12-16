@@ -6,7 +6,6 @@ body{
   background: white;
 }
 h1{
-  margin: 0;
   font-family: 'Poppins', sans-serif;
 }
 span{
@@ -137,4 +136,7 @@ span{
 .invisible {
   position: absolute;
   left: -9999px;
+}
+.add-todo-text{
+  transition: 0.2s;
 }

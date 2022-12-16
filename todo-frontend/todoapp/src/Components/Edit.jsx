@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import AddButton from './AddButton'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-
-export default function TodoForm({editing = false}) {
+export default function Edit() {
     const navigate = useNavigate();
     const navigatePath = (path) => navigate(`${path}`);
+    let { id } = useParams();
 
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState("");
-
     const [succesMessage, setSuccesMessage] = useState("");
     const [succes, setSucces] = useState(false);
 
@@ -26,8 +24,8 @@ export default function TodoForm({editing = false}) {
 
         setLoading(true);
         try{
-            const response = await fetch("http://localhost:4000/api/todo/add", {
-                method: 'POST',
+            const response = await fetch(`http://localhost:4000/api/todo/update/${id}`, {
+                method: 'PUT',
                 headers : {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin':'*',
@@ -36,8 +34,6 @@ export default function TodoForm({editing = false}) {
                     description: input
                 })
             })
-            const data = await response.json()
-            console.log(data);
             setSuccesMessage(input);
             setInput("");
             setSucces(true);
@@ -50,7 +46,7 @@ export default function TodoForm({editing = false}) {
     <div className='todo-form'>
         <div style={{height: "100px", width: "100%", display: "flex", justifyContent: "center", alignContent: "center", position: "absolute"}}>
             <div style={{height: "100%", display: "flex", alignItems: "center"}}>
-                <h1>New Todo</h1>
+                <h1>Edit Todo</h1>
             </div>
         </div>
         <div style={{height: "700px", display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -63,7 +59,7 @@ export default function TodoForm({editing = false}) {
                     multiline
                     rows={4}
                 />
-                <Button variant="contained" onClick={addTodo}>Add Todo</Button>
+                <Button variant="contained" onClick={addTodo}>Edit Todo</Button>
                 <Button variant="outlined" onClick={() => navigatePath('/')}>Back</Button>
                 
                 <div style={{height: "100px", display: "flex", justifyContent: "center"}}>
@@ -73,7 +69,7 @@ export default function TodoForm({editing = false}) {
                     {succesMessage.length > 0 &&
                         <>
                             {succes ? 
-                                <span style={{color: "green"}}> <b> Added Todo: {succesMessage}</b> </span>
+                                <span style={{color: "green"}}> <b> Edited Todo: {succesMessage}</b> </span>
                                 :
                                 <span style={{color: "red" }}> <b>{succesMessage}</b> </span>
                             }
