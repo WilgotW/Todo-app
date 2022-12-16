@@ -3,10 +3,8 @@ const { db } = require("../model/Todo");
 const Todo = require("../model/Todo");
 
 router.get("/getAll", async (req, res) => {
-    
-    const allTodos = Todo.find();
-    if(!allTodos) return res.status(404).send("No todo found");
-    res.send(allTodos);
+    const todos = await Todo.find();
+    return res.json(todos)
 });
 
 

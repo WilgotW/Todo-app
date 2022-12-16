@@ -7,7 +7,7 @@ const cors = require("cors")
 dotenv.config();
 
 //routes
-const todoRoute = require("./Routes/todoActions");
+const todoRoute = require("./routes/todoActions");
 
 //connect to database
 mongoose.connect(process.env.DATABASE_URL, () => console.log("Connected to TodoDatabase"));
