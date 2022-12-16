@@ -12,6 +12,7 @@ export default function TodoCollection() {
         headers : {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin':'*',
+          // 'Authorization': `Bearer ${localStorage.getItem("AccessToken")}`
         }
       })
       const allTodos = await response.json();
