@@ -27,11 +27,13 @@ router.delete("/remove/:id", async (req, res) => {
 });
 
 router.put("/update/:id", async (req, res) => {
-    const todoToChange = await Todo.findOne({_id: req.params.id});
-    if(!todoToChange) return res.status(404).send("Todo doesnt exist in database");
-    
-    const updatedTodo = await Todo.findOneAndUpdate({_id: req.params.id}, {description: req.body.description});
-    res.send(`updated todo  ${req.params.id} to: ${req.body.description}`);
+    try{
+        const todoToChange = await Todo.findOne({_id: req.params.id});
+        const updatedTodo = await Todo.findOneAndUpdate({_id: req.params.id}, {description: req.body.description});
+        res.send(`updated todo  ${req.params.id} to: ${req.body.description}`);
+    }catch(err){
+        res.status(400).send(err);
+    }
 });
 
 module.exports = router;
