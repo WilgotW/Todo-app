@@ -1,12 +1,11 @@
 const router = require("express").Router();
-const { db } = require("../model/Todo");
+// const { db } = require("../model/Todo");
 const Todo = require("../model/Todo");
 
 router.get("/getAll", async (req, res) => {
     const todos = await Todo.find();
     return res.json(todos)
 });
-
 
 router.post("/add", async (req, res) => {
     const todo = new Todo({
@@ -19,6 +18,7 @@ router.post("/add", async (req, res) => {
         res.status(400).send(err);
     }
 });
+
 router.delete("/remove/:id", async (req, res) => {
     const todoToRemove = await Todo.findOne({_id: req.params.id});
     if(!todoToRemove) return res.status(404).send("Todo doesnt exist in database");
