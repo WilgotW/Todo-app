@@ -12,7 +12,6 @@ export default function Home() {
         console.log(localStorage.getItem("authToken"))
         if(localStorage.getItem("authToken")){
             console.log("logged In!");
-            console.log(localStorage.getItem("authToken"));
             setLoggedIn(true);
         }else{
             setLoggedIn(false);

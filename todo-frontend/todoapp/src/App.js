@@ -1,12 +1,12 @@
 import './App.css';
 import Navbar from './Components/Navbar';
-import TodoForm from './Components/TodoForm';
+import TodoForm from './Pages/TodoForm';
 import TodoSection from './Components/TodoSection';
 import { HashRouter as Router, Route, Routes , useParams} from 'react-router-dom';
-import Edit from './Components/Edit';
-import LoginPage from './Components/LoginPage';
-import RegisterPage from './Components/RegisterPage';
-import Home from './Components/Home';
+import Edit from './Pages/Edit';
+import LoginPage from './Pages/LoginPage';
+import RegisterPage from './Pages/RegisterPage';
+import Home from './Pages/Home';
 
 function App() {
   return (

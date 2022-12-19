@@ -21,7 +21,6 @@ export default function Todo(props) {
           'userAuth': `${localStorage.getItem("authToken")}`
         }
       })
-      console.log(response);
       props.getTodos();
     }catch(err){
       console.log(err);
@@ -36,9 +35,6 @@ export default function Todo(props) {
         </span>
       </div>
       <div style={{textAlign: "center"}}>
-        <span className='todo-description'>
-          {props.id}
-        </span>
         <div>
           <Checkbox
             {...label}

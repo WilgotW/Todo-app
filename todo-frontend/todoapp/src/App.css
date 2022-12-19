@@ -101,6 +101,10 @@ span{
 .todo{
   white-space: initial;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 300px;
   min-height: 100px;
 

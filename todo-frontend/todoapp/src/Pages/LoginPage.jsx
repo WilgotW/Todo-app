@@ -28,7 +28,7 @@ export default function LoginPage() {
         })
       });
       const data = await response.json();
-  
+      
       if(response.status == 200){
         localStorage.setItem("authToken", data);
         console.log(localStorage.getItem("authToken"));
