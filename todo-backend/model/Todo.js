@@ -5,6 +5,11 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 1
+    },
+    token: {
+        type: String,
+        required: true,
+        min: 1
     }
 })
 
