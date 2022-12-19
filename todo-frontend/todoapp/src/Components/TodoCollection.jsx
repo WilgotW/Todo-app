@@ -6,17 +6,20 @@ export default function TodoCollection() {
   const [todos, setTodos] = useState([]);
 
   async function getTodos(){
+    console.log(localStorage.getItem("authToken"));
     try{
       const response = await fetch("http://localhost:4000/api/todo/getAll", {
-        method: 'GET',
-        headers : {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin':'*',
-          // 'Authorization': `Bearer ${localStorage.getItem("AccessToken")}`
-        }
+        method: 'POST',
+          headers : {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*',
+            'userAuth': `${localStorage.getItem("authToken")}`
+          },
+          body : JSON.stringify( {
+            token: localStorage.getItem("authToken")
+          })
       })
       const allTodos = await response.json();
-      console.log(await allTodos);
       setTodos(await allTodos);
     }catch(err){
       console.log(err);

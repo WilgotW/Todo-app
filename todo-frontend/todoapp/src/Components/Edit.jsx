@@ -29,9 +29,11 @@ export default function Edit() {
                 headers : {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin':'*',
+                    'userAuth': `${localStorage.getItem("authToken")}`
                 },
                 body : JSON.stringify( {
-                    description: input
+                    description: input,
+                    token: localStorage.getItem("authToken")
                 })
             })
             setSuccesMessage(input);
@@ -60,7 +62,7 @@ export default function Edit() {
                     rows={4}
                 />
                 <Button variant="contained" onClick={addTodo}>Edit Todo</Button>
-                <Button variant="outlined" onClick={() => navigatePath('/')}>Back</Button>
+                <Button variant="outlined" onClick={() => navigatePath('/todos')}>Back</Button>
                 
                 <div style={{height: "100px", display: "flex", justifyContent: "center"}}>
                     <div className={loading ? "loader" : "invisible"} />

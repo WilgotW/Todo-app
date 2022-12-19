@@ -18,6 +18,7 @@ export default function Todo(props) {
         headers : {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin':'*',
+          'userAuth': `${localStorage.getItem("authToken")}`
         }
       })
       console.log(response);

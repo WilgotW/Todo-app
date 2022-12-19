@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddButton from './AddButton'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -14,6 +14,10 @@ export default function TodoForm({editing = false}) {
 
     const [succesMessage, setSuccesMessage] = useState("");
     const [succes, setSucces] = useState(false);
+
+    useEffect(() => {
+        console.log(localStorage.getItem("authToken"));
+    }, [])
 
     async function addTodo(ev) {
         ev.preventDefault();
@@ -31,11 +35,14 @@ export default function TodoForm({editing = false}) {
                 headers : {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin':'*',
+                    'userAuth': `${localStorage.getItem("authToken")}`
                 },
                 body : JSON.stringify( {
-                    description: input
+                    description: input,
+                    token: localStorage.getItem("authToken")
                 })
             })
+            console.log(response);
             const data = await response.json()
             console.log(data);
             setSuccesMessage(input);
@@ -64,7 +71,7 @@ export default function TodoForm({editing = false}) {
                     rows={4}
                 />
                 <Button variant="contained" onClick={addTodo}>Add Todo</Button>
-                <Button variant="outlined" onClick={() => navigatePath('/')}>Back</Button>
+                <Button variant="outlined" onClick={() => navigatePath('/todos')}>Back</Button>
                 
                 <div style={{height: "100px", display: "flex", justifyContent: "center"}}>
                     <div className={loading ? "loader" : "invisible"} />

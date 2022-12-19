@@ -12,7 +12,8 @@ export default function RegisterPage() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  const [succes, setSucces] = useState(false)
+  const [succes, setSucces] = useState(false);
+  const [message, setMessage] = useState("");
 
   async function register(ev){
     ev.preventDefault();
@@ -31,8 +32,12 @@ export default function RegisterPage() {
       });
 
       resetStates(setUserName, setUserEmail, setUserPassword);
+      setMessage("Succecfully created new User!");
+      setSucces(true)
     }catch(err){
       console.log(err);
+      setMessage("Error occurred...");
+      setSucces(false);
     }
   }
 
@@ -45,8 +50,12 @@ export default function RegisterPage() {
         <Button variant="contained" onClick={register}>Register</Button>
         <Button variant="outlined" onClick={() => navigatePath("/")}>Back</Button>
     
-        <div style={{height: "50px", alignItems: "center", display: "flex"}}>
-          <span color='green'>Succecfully created new User!</span>
+        <div style={{height: "50px", alignItems: "center", display: "flex", justifyContent: "center"}}>
+          
+          {message.length > 0 &&
+            <span style={{color: succes ? "green" : "red"}}>{message}</span>
+          }
+
         </div>
       </div>
     </div>
