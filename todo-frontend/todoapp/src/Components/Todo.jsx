@@ -31,20 +31,28 @@ export default function Todo(props) {
   }
 
   async function checkTodo(){
+    
     try{
-      const response = await fetch(`http://localhost:4000/api/todo/check`, {
+      const checkStatus = isChecked ? false : true;
+      console.log(checkStatus);
+      const response = await fetch(`http://localhost:4000/api/todo/check/${props.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin':'*',
           'userAuth': `${localStorage.getItem("authToken")}`
         }, 
-        body: {
-          id: props.id,
-          check: true
-        }
+        body : JSON.stringify( {
+          checked: checkStatus
+        })
       })
+
+      // const data = await response.json();
       console.log(response);
+
+      console.log(isChecked ? "unchecked" : "checked");
+      setIsChecked(checkStatus);
+
       //update todo list
       props.getTodos();
     }catch(err){
@@ -70,8 +78,8 @@ export default function Todo(props) {
             {...label}
             sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
             checked={isChecked}
-            defaultChecked={props.checked}
-            onChange={checkTodo}
+            defaultChecked={false}
+            onChange={() => checkTodo()}
           />
           <IconButton color="error" aria-label="upload picture" component="label" onClick={deleteById}>
             <RiDeleteBin6Line style={{height: "22px", width: "22px"}} />
