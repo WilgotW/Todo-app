@@ -26,19 +26,6 @@ router.post("/add", verify, async (req, res) => {
     }
 });
 
-router.put("/check", verify, async (req, res) => {
-
-    const todoToChange = await Todo.findOne({_id: req.body.id});
-    if(!todoToRemove) return res.status(404).send("Todo doesnt exist in database");
-
-    try{
-        //find todo to check
-        const todoToCheck = await Todo.findOneAndUpdate({_id: req.body.id}, {checked: req.body.check});
-        res.send(`todo ${req.params.id} is check value is now ${checkValue}`)
-    }catch(err){
-        res.status(400).send("Could not find todo" + checkValue);
-    }
-});
 
 router.delete("/remove/:id", verify, async (req, res) => {
     const todoToRemove = await Todo.findOne({_id: req.params.id});
@@ -47,6 +34,15 @@ router.delete("/remove/:id", verify, async (req, res) => {
     res.send("deleted todo");
 });
 
+router.put("/check/:id", verify, async (req, res) => {
+    try{
+        const todoToChange = await Todo.findOne({_id: req.params.id});
+        const updatedTodo = await Todo.findOneAndUpdate({_id: req.params.id}, {checked: req.body.checked});
+        res.send(`updated todo`);
+    }catch(err){
+        res.status(400).send(err);
+    }
+});
 router.put("/update/:id", verify, async (req, res) => {
     try{
         const todoToChange = await Todo.findOne({_id: req.params.id});
