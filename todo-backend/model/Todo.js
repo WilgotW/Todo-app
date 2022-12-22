@@ -6,10 +6,14 @@ const todoSchema = new mongoose.Schema({
         required: true,
         min: 1
     },
-    token: {
+    userId: {
         type: String,
         required: true,
         min: 1
+    },
+    checked: {
+        type: Boolean,
+        required: true,
     }
 })
 

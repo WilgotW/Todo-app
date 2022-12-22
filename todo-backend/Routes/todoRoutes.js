@@ -1,22 +1,42 @@
 const router = require("express").Router();
 const Todo = require("../model/Todo");
 const verify = require("./verifyToken");
+const jwt = require("jsonwebtoken");
 
 router.post("/getAll", verify , async (req, res) => {
-    const todos = await Todo.find({token: req.body.token});
+    const decoded = jwt.decode(req.body.token);
+
+    const todos = await Todo.find({userId: decoded._id});
     return res.json(todos)
 });
 
-router.post("/add", verify, async (req, res) => {
+router.post("/add", verify, async (req, res) => {    
+    const decoded = jwt.decode(req.body.token);
+
     const todo = new Todo({
         description: req.body.description,
-        token: req.body.token
+        userId: decoded._id,
+        checked: false
     });
     try{
         const savedTodo = await todo.save();
         res.send(savedTodo);
     }catch(err){
         res.status(400).send(err);
+    }
+});
+
+router.put("/check", verify, async (req, res) => {
+
+    const todoToChange = await Todo.findOne({_id: req.body.id});
+    if(!todoToRemove) return res.status(404).send("Todo doesnt exist in database");
+
+    try{
+        //find todo to check
+        const todoToCheck = await Todo.findOneAndUpdate({_id: req.body.id}, {checked: req.body.check});
+        res.send(`todo ${req.params.id} is check value is now ${checkValue}`)
+    }catch(err){
+        res.status(400).send("Could not find todo" + checkValue);
     }
 });
 
