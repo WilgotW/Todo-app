@@ -32,7 +32,7 @@ router.delete("/remove/:id", verify, async (req, res) => {
     if(!todoToRemove) return res.status(404).send("Todo doesnt exist in database");
     todoToRemove.delete();
     res.send("deleted todo");
-});
+}); 
 
 router.put("/check/:id", verify, async (req, res) => {
     try{
