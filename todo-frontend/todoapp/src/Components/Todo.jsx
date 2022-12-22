@@ -21,6 +21,7 @@ export default function Todo(props) {
           'userAuth': `${localStorage.getItem("authToken")}`
         }
       })
+      //update todo list
       props.getTodos();
     }catch(err){
       console.log(err);
