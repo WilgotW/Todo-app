@@ -9,7 +9,6 @@ export default function Home() {
     const [loggedIn, setLoggedIn] = useState(false);
 
     function checkIfLoggedIn(){
-        console.log(localStorage.getItem("authToken"))
         if(localStorage.getItem("authToken")){
             console.log("logged In!");
             setLoggedIn(true);

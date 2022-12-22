@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import {RiDeleteBin6Line} from 'react-icons/ri'
@@ -10,6 +10,8 @@ export default function Todo(props) {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const navigate = useNavigate();
   const navigatePath = (path) => navigate(`${path}`);
+
+  const [isChecked, setIsChecked] = useState(false);
 
   async function deleteById(){
     try{
@@ -28,6 +30,33 @@ export default function Todo(props) {
     }
   }
 
+  async function checkTodo(){
+    try{
+      const response = await fetch(`http://localhost:4000/api/todo/check`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'*',
+          'userAuth': `${localStorage.getItem("authToken")}`
+        }, 
+        body: {
+          id: props.id,
+          check: true
+        }
+      })
+      console.log(response);
+      //update todo list
+      props.getTodos();
+    }catch(err){
+      console.log(err);
+    }
+    
+  }
+
+  useEffect(() => {
+    setIsChecked(props.checked);
+  }, [])
+
   return (
     <div className='todo'>
       <div style={{textAlign: "center"}}>
@@ -40,6 +69,9 @@ export default function Todo(props) {
           <Checkbox
             {...label}
             sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+            checked={isChecked}
+            defaultChecked={props.checked}
+            onChange={checkTodo}
           />
           <IconButton color="error" aria-label="upload picture" component="label" onClick={deleteById}>
             <RiDeleteBin6Line style={{height: "22px", width: "22px"}} />

@@ -27,11 +27,11 @@ export default function LoginPage() {
           password: userPassword
         })
       });
-      const data = await response.json();
       
+      const data = await response.json();
+
       if(response.status == 200){
         localStorage.setItem("authToken", data);
-        console.log(localStorage.getItem("authToken"));
       }
 
       resetStates(setUserEmail, setUserPassword);

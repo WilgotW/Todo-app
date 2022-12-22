@@ -6,7 +6,6 @@ export default function TodoCollection() {
   const [todos, setTodos] = useState([]);
 
   async function getTodos(){
-    console.log(localStorage.getItem("authToken"));
     try{
       const response = await fetch("http://localhost:4000/api/todo/getAll", {
         method: 'POST',
@@ -35,7 +34,7 @@ export default function TodoCollection() {
       <div className='todo-grid'>
         {todos.length > 0 &&
           <>
-            {todos.map(todo => <Todo key={todo._id} description={todo.description} id={todo._id} getTodos={getTodos} />)}
+            {todos.map(todo => <Todo key={todo._id} description={todo.description} id={todo._id} getTodos={getTodos} checked={todo.checked}/>)}
           </>
         }
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>

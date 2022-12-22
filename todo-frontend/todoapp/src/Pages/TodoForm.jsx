@@ -14,10 +14,6 @@ export default function TodoForm({editing = false}) {
     const [succesMessage, setSuccesMessage] = useState("");
     const [succes, setSucces] = useState(false);
 
-    useEffect(() => {
-        console.log(localStorage.getItem("authToken"));
-    }, [])
-
     async function addTodo(ev) {
         ev.preventDefault();
 
@@ -41,9 +37,7 @@ export default function TodoForm({editing = false}) {
                     token: localStorage.getItem("authToken")
                 })
             })
-            console.log(response);
             const data = await response.json()
-            console.log(data);
             setSuccesMessage(input);
             setInput("");
             setSucces(true);
