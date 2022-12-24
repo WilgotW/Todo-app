@@ -8,7 +8,7 @@ export default function TodoSection() {
   const navigatePath = (path) => navigate(`${path}`);
   
   function logout(){
-    localStorage.setItem("authToken", "");
+    localStorage.removeItem("authToken");
     navigatePath('/')
   }
 
